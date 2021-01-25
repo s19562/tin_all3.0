@@ -1,0 +1,163 @@
+<%- include('../fragments/header.ejs') %>
+
+<main>
+    <script type="application/javascript" src="/JS/validationKlientForm.js"></script>
+    <h2><%= pageTitle %></h2>
+        
+    <form class="form" method="post" action="<%=formAction%>" novalidate onsubmit="return validateForm();">
+    
+        <!-- <form class="form" method="post" action="<%=formAction%>" novalidate > -->
+
+        <input type="hidden" name="_id" value="<%= klient._id %>">
+
+            
+                <label for="ImieKlient">Imię:<sup>*</sup></label>
+                <input type="text" name="firstName" id="firstName" placeholder="2-60 znaków" value="<%= klient.firstName %>"
+                <% if(validationErrors) { %>
+                class="<%= validationErrors.find(e => e.path.includes('firstName')) ? 'error-input' : '' %>"
+                <% } %>
+                <%= (formMode == 'showDetails') ? 'disabled' : '' %> />
+                <span id="errorFirstName" class="errors-text" >
+                    <% if(validationErrors) {
+                         if (validationErrors.find(k => k.path.includes('firstName'))) { %>
+                        <%= validationErrors.find(k => k.path.includes('firstName')).message %>
+                    <% } 
+                        }
+                        %>
+                   
+                </span>
+            
+                <label for="NazwiskoKlient">Nazwisko:<sup>*</sup></label>
+                <input type="text" name="lastName" id="lastName" placeholder="2-60 znaków" value="<%= klient.lastName %>"
+                <% if(validationErrors) { %>
+                class="<%= validationErrors.find(e => e.path.includes('lastName')) ? 'error-input' : '' %>"
+                <% } %>
+                <%= (formMode == 'showDetails') ? 'disabled' : '' %>
+                />
+                <span id="errorLastName" class="errors-text" required>
+                    <% if(validationErrors) {
+                         if (validationErrors.find(e => e.path.includes('lastName'))) { %>
+                        <%= validationErrors.find(e => e.path.includes('lastName')).message %>
+                        <% } 
+                    }
+                    %>
+                    
+                </span>
+         
+            
+                <label for="NumerTelKlient">Numer telefonu:<sup>*</sup></label>
+                <input type="text" name="nrTel" id="nrTel" placeholder="np 123456789" value="<%= klient.nrTel %>"
+                <% if(validationErrors) { %>
+                class="<%= validationErrors.find(e => e.path.includes('nrTel')) ? 'error-input' : '' %>"
+                <% } %>
+                <%= (formMode == 'showDetails') ? 'disabled' : '' %>
+                />
+                <span id="errorNumerTel" class="errors-text" required>
+                    <% if(validationErrors) {
+                         if (validationErrors.find(e => e.path.includes('nrTel'))) { %>
+                        <%= validationErrors.find(e => e.path.includes('nrTel')).message %>
+                        <% } 
+                    }
+                    %>
+                    
+                </span>
+           
+            
+                <label for="Uwagii">Uwagi:</label>
+                <input type="text" name="uwagi" id="uwagi" placeholder="wpisz opcjonalne uwagi" value="<%= klient.uwagi %>"
+                <% if(validationErrors) { %>
+                class="<%= validationErrors.find(e => e.path.includes('uwagi')) ? 'error-input' : '' %>"
+                <% } %>
+                <%= (formMode == 'showDetails') ? 'disabled' : '' %>
+                />
+                <span id="errorUwagi" class="errors-text">
+                    <% if(validationErrors) {
+                        if (validationErrors.find(e => e.path.includes('uwagi'))) { %>
+                        <%= validationErrors.find(e => e.path.includes('uwagi')).message %>
+                        <% } 
+                    }
+                    %>
+                   
+                </span>
+    
+                <!-- <div class="form-buttons">
+                    <p id="errorsSummary" class="errors-text"></p>
+                <input type="submit" class = "form-button-submit"value="Dodaj" />
+                <a href="klienci-list.html" class = "form-button-cancel">Anuluj</a>    
+                 </div> -->
+
+                 <% if (formMode == 'showDetails') { %>
+                    <div class="section-buttons">
+                        <a href="/klienci/edit/<%= klient._id %>" class="list-actions-button-edit">Edytuj</a>
+                    </div>
+                    
+                    <% } %>
+
+
+                    <div class="form-buttons">
+                        <p id="errorsSummary" class="errors-text"></p>
+                        <% if (formMode != 'showDetails') { %>
+                            <input class="form-button-submit" type="submit" value="<%=btnLabel%>" />
+                            <a class="form-button-cancel" href="/klienci">Anuluj</a>
+                        <% } else { %>
+                            <a class="form-button-cancel" href="/klienci">Powrót</a>
+                        <% } %>
+                    </div>
+  </form>
+
+
+                    <% if (formMode == 'showDetails' || formMode == 'edit') { %>
+                        
+                      
+
+                        <h2>
+                            Szczegóły zamówienia
+                        </h2>
+
+                        <table class="table-list">
+                            <thead>
+                            <tr>
+                                <th>Wyrób</th>
+                                <th>Ilość</th>
+                                <th>Cena All</th>
+                                <th>Data zamówienia</th>
+                                <th>Rabat</th>
+                                <th>Uwaga</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <% for (let zamowienie of klient.zamowienia) { %>  
+                             
+                              
+
+                                <tr>
+                                    <td><a href="/wyroby/details/<%= zamowienie.wyrob._id %>"><%= zamowienie.wyrob.name %></a></td>
+                                    <td><%= zamowienie.ilosc %></td>
+                                    <td><%= zamowienie.cenaAll %></td> 
+                                    <td><%= zamowienie.dataZam.toISOString().split('T')[0] %></td>
+                                    <td><%= zamowienie.rabat %></td>
+                                    <td><%= zamowienie.uwaga %></td>
+                                </tr>
+                            <% } %>
+                            </tbody>
+                        </table>
+
+                        <% } %>
+
+                        <!-- <div class="form-buttons">
+                            <p id="errorsSummary" class="errors-text"></p>
+                            <% if (formMode != 'showDetails') { %>
+                                <input class="form-button-submit" type="submit" value="<%=btnLabel%>" />
+                                <a class="form-button-cancel" href="/klienci">Anuluj</a>
+                            <% } else { %>
+                                <a class="form-button-cancel" href="/klienci">Powrót</a>
+                            <% } %>
+                        </div> -->
+
+
+        
+
+
+    </main>
+
+    <%- include('../fragments/footer.ejs') %>

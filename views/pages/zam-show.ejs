@@ -1,0 +1,59 @@
+<%- include('../fragments/header.ejs') %>
+    <main>
+        <h2>Szczegóły zamówienia</h2>
+        
+        <form class="form">
+           
+           
+                <label for="ImieKlient">Imię:</label>
+                <input type="text" name="ImieKlient" value="Jan" id="ImieKlient" disabled  />
+                <div></div>
+
+                <label for="NazwiskoKlient">Nazwsiko:</label>
+                <input type="text" name="NazwiskoKlient" value="Kowalski" id="NazwiskoKlient" disabled />
+                <div></div>
+
+                <label for="NumerTelKlient">Numer telefonu:</label>
+                <input type="text" name="NumerTelKlient" value="333444555" id="NumerTelKlient" disabled />
+                <div></div>
+
+                <label for="Nazwa">Wyrób:</label>
+                <input type="text" name="Nazwa" value="" id="Nazwa" disabled />
+                <div></div>
+
+                <label for="Ilosc">Ilość:</label>
+                <input type="text" name="Ilosc" value="" id="Ilosc" disabled />
+                <div></div>
+
+                <label for="CenaZaIlosc">Cena all:</label>
+                <input type="text" name="CenaZaIlosc" value="" id="CenaZaIlosc" disabled />
+                <div></div>
+
+                <label for="DataZloz">Data złożenia zamówienia:</label>
+                <input type="text" name="DataZloz" value="" id="DataZloz" disabled />
+                <div></div>
+
+                <label for="Rabat">Rabat:</label>
+                <input type="text" name="Rabat" value="" id="Rabat" disabled />
+                <div></div>
+
+                <label for="Uwagii">Uwagi:</label>
+                <input type="text" name="Uwagii" value="" id="Uwagii" disabled />
+                <div></div>
+                
+
+            <div class="form-buttons">
+            <a href="" class ="list-actions-button-edit" >Edytuj</a> 
+             <a href="zam-lista.html" class ="list-actions-button-details">Powrót</a> 
+            </div>
+            
+        </form>
+
+      
+       
+
+
+
+    </main>
+
+    <%- include('../fragments/footer.ejs') %>

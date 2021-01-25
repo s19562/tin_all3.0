@@ -1,0 +1,109 @@
+<%- include('../fragments/header.ejs') %>
+
+<main>
+    <script type="application/javascript" src="/JS/validationWyrobForm.js"></script>
+    <h2><%= pageTitle %></h2>
+        
+    <form class="form" method="post" action="<%=formAction%>" novalidate onSubmit="return validateForm();">
+           
+        <!-- <form class="form" method="post" action="<%=formAction%>" novalidate > -->
+
+        <input type="hidden" name="_id" value="<%= wyrob._id %>">
+           
+            
+                <label for="name">Nazwa:<sup>*</sup></label>
+                <input type="text" name="name" id="name" placeholder="2-60 znaków" value="<%= wyrob.name %>"
+                <%= (formMode == 'showDetails') ? 'disabled' : '' %>
+                <% if(validationErrors) { %>
+                class="<%= validationErrors.find(e => e.path.includes('name')) ? 'error-input' : '' %>"
+                <% } %>
+                />
+                <span id="errorNazwa" class="errors-text" required>
+                    <% if(validationErrors) {
+                     if (validationErrors.find(e => e.path.includes('name'))) { %>
+                        <%= validationErrors.find(e => e.path.includes('name')).message %>
+                    <% } 
+                        }
+                        %>
+
+                </span>
+
+                <label for="cenaSz">Cena:<sup>*</sup></label>
+                <input type="text" name="cenaSz" id="cenaSz" placeholder="np 1.20" value="<%= wyrob.cenaSz %>"
+                <%= (formMode == 'showDetails') ? 'disabled' : '' %>
+                <% if(validationErrors) { %>
+                class="<%= validationErrors.find(e => e.path.includes('cenaSz')) ? 'error-input' : '' %>"
+                <% } %>
+                />
+                <span id="errorCena" class="errors-text" required>
+                    <% if(validationErrors) {
+                     if (validationErrors.find(e => e.path.includes('cenaSz'))) { %>
+                        <%= validationErrors.find(e => e.path.includes('cenaSz')).message %>
+                        <% 
+                    } 
+                    }
+                    %>
+                </span>
+
+             <% if (formMode == 'showDetails') { %>
+                <div class="section-buttons">
+                    <a href="/wyroby/edit/<%= wyrob._id %>" class="list-actions-button-edit">Edytuj</a>
+                </div>
+                <% } %>
+
+                
+
+                <div class="form-buttons">
+                    <p id="errorsSummary" class="errors-text"></p>
+                    <% if (formMode != 'showDetails') { %>
+                        <input class="form-button-submit" type="submit" value="<%=btnLabel%>" />
+                        <a class="form-button-cancel" href="/wyroby">Anuluj</a>
+                    <% } else { %>
+                        <a class="form-button-cancel" href="/wyroby">Powrót</a>
+                    <% } %>
+                </div>
+
+        
+        </form>
+
+        <% if (formMode == 'showDetails' || formMode == 'edit') { %>
+                        
+                      
+
+            <h2>
+                Szczegóły zamówienia
+            </h2>
+
+            <table class="table-list">
+                <thead>
+                <tr>
+                    <th>Wyrób</th>
+                    <th>Ilość</th>
+                    <th>Cena All</th>
+                    <th>Data zamówienia</th>
+                    <th>Rabat</th>
+                    <th>Uwaga</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for (let zamowienie of wyrob.zamowienia) { %>  
+                 
+                
+                    <tr>
+                        <td><a href="/klienci/details/<%= zamowienie.klient._id %>"><%= zamowienie.klient.firstName %></a></td>
+                        <td><%= zamowienie.ilosc %></td>
+                        <td><%= zamowienie.cenaAll %></td> 
+                        <td><%= zamowienie.dataZam.toISOString().split('T')[0] %></td>
+                        <td><%= zamowienie.rabat %></td>
+                        <td><%= zamowienie.uwaga %></td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+
+            <% } %>
+
+
+    </main>
+
+    <%- include('../fragments/footer.ejs') %>

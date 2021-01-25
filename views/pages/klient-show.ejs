@@ -1,0 +1,67 @@
+<%- include('../fragments/header.ejs') %>
+
+    <main>
+        <h2>Szczegóły klienta</h2>
+        
+        <form class="form">
+           
+            
+                <label for="ImieKlient">Imię:</label>
+                <input type="text" name="ImieKlient" value="Jan" id="ImieKlient" disabled  />
+                <div></div>
+           
+                <label for="NazwiskoKlient">Nazwsiko:</label>
+                <input type="text" name="NazwiskoKlient" value="Kowalski" id="NazwiskoKlient" disabled />
+                <div></div>
+            
+                <label for="NumerTelKlient">Numer telefonu:</label>
+                <input type="text" name="NumerTelKlient" value="333444555" id="NumerTelKlient" disabled />
+                <div></div>
+           
+                <label for="Uwagii">Uwagi:</label>
+                <input type="text" name="Uwagii" value="" id="Uwagii" disabled />
+                <div></div>
+
+            <a href="" class ="list-actions-button-edit" >Edytuj</a> 
+
+            <!-- <% if (formMode == 'showDetails') { %>
+                <div class="section-buttons">
+                    <a href="/employees/edit/<%= klient._id %>" class="button-edit">Edytuj</a>
+                </div>
+                <% } %> -->
+
+        </form>
+
+        <h2>Szczegóły zamówień klienta</h2>
+
+        <table class = "table-list">
+            <thead>
+                <tr>
+                    <th>Nazwa wyrobu</th>
+                    <th>Ilość</th>
+                    <th>Cena</th>
+                    <th>Rabat</th>
+                  
+
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Pączek</td>
+                    <td>2</td>
+                    <td>3.0</td>
+                    <td>0</td>
+                    
+                    
+            </tbody>
+
+        </table>
+
+        <a href="klienci-list.html" class ="list-actions-button-details">Powrót</a> 
+
+
+
+    </main>
+
+    <%- include('../fragments/footer.ejs') %>

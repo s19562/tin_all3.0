@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="application/javascript" src="/JS/validationCommon.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Stona</title>
+  
+
+</head>
+<body>
+    <header>
+        <h1>Cukiernia</h1>
+        <img src="/images/cuksy.png" alt="Cukiernia Logo" class="obrazek">
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/"  class="<%= navLocation == 'main' ? 'active' : ''%>">Strona główna</a></li>
+            <li><a href="/klienci" class="<%= navLocation == 'klient' ? 'active' : ''%>">Klienci</a></li>
+            <li><a href="/wyroby" class="<%= navLocation == 'wyrob' ? 'active' : ''%>">Wyroby</a></li>
+            <li><a href="/zam" class="<%= navLocation == 'zam' ? 'active' : ''%>">Zamówienia</a></li>
+            <li><a href="/gal" class="<%= navLocation == 'gal' ? 'active' : ''%>">Galeria</a></li>
+
+            
+            
+        </ul>
+    </nav>
